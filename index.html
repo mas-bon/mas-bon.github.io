@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mas-bon | Portfolio & Web Apps</title>
+  <meta name="description" content="Portfolio di mas-bon - Appassionato di programmazione e web tools. Scopri le mie applicazioni web e progetti open source." />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles: Dark theme accents, gradients & animations -->
+  <style>
+    /* Ambient background grid pattern */
+    .bg-grid-pattern {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    /* Glow orb animation */
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.08); }
+    }
+    .animate-glow {
+      animation: pulse-slow 8s ease-in-out infinite alternate;
+    }
+
+    /* Glassmorphism card styling */
+    .glass-card {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.45);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 30px -10px rgba(99, 102, 241, 0.15);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090d16;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+  </style>
+</head>
+<body class="bg-[#090d16] text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white relative overflow-x-hidden">
+
+  <!-- Background decorative light orbs -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[650px] h-[400px] bg-indigo-600/20 blur-[130px] rounded-full animate-glow"></div>
+    <div class="absolute top-[40%] -left-32 w-[500px] h-[350px] bg-cyan-600/15 blur-[120px] rounded-full animate-glow" style="animation-delay: 3s;"></div>
+    <div class="absolute bottom-10 -right-32 w-[550px] h-[400px] bg-violet-600/15 blur-[140px] rounded-full animate-glow" style="animation-delay: 5s;"></div>
+    <div class="absolute inset-0 bg-grid-pattern pointer-events-none"></div>
+  </div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-[#090d16]/75 border-b border-white/5 transition-all">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <!-- Logo / Monogram -->
+      <a href="#" class="flex items-center gap-2 group">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center font-mono font-bold text-white shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+          MB
+        </div>
+        <span class="font-bold tracking-tight text-lg text-white group-hover:text-indigo-400 transition-colors">
+          mas-bon<span class="text-indigo-500">.</span>
+        </span>
+      </a>
+
+      <!-- Navigation links -->
+      <nav class="flex items-center gap-3 sm:gap-6">
+        <a href="#apps" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+          Web Apps
+        </a>
+        <a href="#about" class="text-sm font-medium text-slate-300 hover:text-white transition-colors hidden sm:inline-block">
+          Chi Sono
+        </a>
+        <a 
+          href="https://github.com/mas-bon" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="flex items-center gap-2 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 transition-all hover:border-indigo-500/40"
+        >
+          <i data-lucide="github" class="w-4 h-4"></i>
+          <span>GitHub</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow relative z-10">
+
+    <!-- HERO SECTION -->
+    <section id="about" class="pt-20 pb-16 sm:pt-28 sm:pb-24 px-4 sm:px-6 max-w-5xl mx-auto text-center">
+      <!-- Status Badge -->
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-950/60 border border-indigo-500/30 text-indigo-300 text-xs sm:text-sm mb-6 shadow-sm">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        Portfolio & Laboratorio Digitale
+      </div>
+
+      <!-- Hero Heading -->
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6">
+        Ciao, sono <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-400">mas-bon</span>
+      </h1>
+
+      <!-- Bio / Subtitle -->
+      <p class="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8">
+        Appassionato di programmazione e web tools. Progetto e sviluppo utility interattive, strumenti moderni e applicazioni web per semplificare le attività di tutti i giorni.
+      </p>
+
+      <!-- Action Buttons & Social Links -->
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <!-- Explore Apps CTA -->
+        <a 
+          href="#apps" 
+          class="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold text-sm shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/40 hover:-translate-y-0.5 transition-all"
+        >
+          <i data-lucide="layout-grid" class="w-4 h-4"></i>
+          <span>Esplora le mie Web App</span>
+        </a>
+
+        <!-- GitHub Profile Button -->
+        <a 
+          href="https://github.com/mas-bon" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-900/80 hover:bg-slate-800/90 text-slate-200 border border-slate-700/80 hover:border-slate-600 font-medium text-sm transition-all hover:-translate-y-0.5 shadow-sm"
+        >
+          <i data-lucide="github" class="w-4 h-4"></i>
+          <span>GitHub</span>
+        </a>
+
+        <!-- LinkedIn Button (Aggiorna con il tuo username LinkedIn) -->
+        <a 
+          href="https://linkedin.com" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-900/80 hover:bg-slate-800/90 text-slate-200 border border-slate-700/80 hover:border-slate-600 font-medium text-sm transition-all hover:-translate-y-0.5 shadow-sm"
+        >
+          <i data-lucide="linkedin" class="w-4 h-4 text-sky-400"></i>
+          <span>LinkedIn</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION WEB APPS -->
+    <section id="apps" class="py-16 px-4 sm:px-6 max-w-6xl mx-auto">
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+        <div>
+          <div class="inline-flex items-center gap-2 text-indigo-400 text-xs font-mono font-bold uppercase tracking-wider mb-2">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            Progetti & Applicazioni
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+            Le mie Web App
+          </h2>
+          <p class="text-slate-400 mt-2 text-sm sm:text-base max-w-xl">
+            Una raccolta di strumenti web e progetti che ho realizzato. Clicca su ciascuna card per provarli direttamente.
+          </p>
+        </div>
+
+        <!-- Search / Filter input -->
+        <div class="relative w-full md:w-72">
+          <i data-lucide="search" class="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Cerca tra le applicazioni..." 
+            class="w-full pl-10 pr-4 py-2 text-sm bg-slate-900/90 border border-slate-800 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
+          />
+        </div>
+      </div>
+
+      <!-- Categories Filter Tabs -->
+      <div id="categoryTabs" class="flex flex-wrap gap-2 mb-8">
+        <button data-category="all" class="category-btn px-4 py-1.5 rounded-lg text-xs font-medium bg-indigo-600 text-white transition-all">
+          Tutte (<span id="totalAppsCount">0</span>)
+        </button>
+        <!-- I bottoni delle categorie verranno iniettati dinamicamente da JavaScript -->
+      </div>
+
+      <!-- Dynamic Cards Grid Container -->
+      <div 
+        id="appsGrid" 
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <!-- Le card verranno generate automaticamente da JavaScript in base all'array WEB_APPS -->
+      </div>
+
+      <!-- Empty State (mostrato quando la ricerca non produce risultati) -->
+      <div id="noResults" class="hidden text-center py-16">
+        <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-500">
+          <i data-lucide="package-search" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-lg font-semibold text-white">Nessuna app trovata</h3>
+        <p class="text-slate-400 text-sm mt-1">Prova a cambiare termine di ricerca o seleziona un'altra categoria.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mt-auto border-t border-white/5 bg-[#070a12]/80 backdrop-blur-md relative z-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2 text-slate-400 text-sm">
+        <span>© <span id="currentYear"></span> <strong>mas-bon</strong></span>
+        <span>•</span>
+        <span>Creato con passione per il web</span>
+      </div>
+
+      <!-- Footer Social Links -->
+      <div class="flex items-center gap-4 text-slate-400">
+        <a href="https://github.com/mas-bon" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" title="GitHub">
+          <i data-lucide="github" class="w-5 h-5"></i>
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" title="LinkedIn">
+          <i data-lucide="linkedin" class="w-5 h-5"></i>
+        </a>
+        <a href="#" class="hover:text-white transition-colors text-xs font-mono uppercase ml-2 text-slate-500 hover:text-indigo-400" title="Torna su">
+          ↑ Inizio
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT: CONFIGURAZIONE & GESTIONE DINAMICA DELLE WEB APP               -->
+  <!-- ========================================================================= -->
+  <script>
+    /*
+      ==========================================================================
+      🚀 GUIDA PER AGGIUNGERE NUOVE WEB APP:
+      ==========================================================================
+      Per aggiungere una nuova applicazione al tuo portfolio, ti basta COPIARE
+      e INCOLLARE uno dei blocchi all'interno dell'array `WEB_APPS` qui sotto.
+
+      PARAMETRI DISPONIBILI:
+      - title:       (Obbligatorio) Nome della web app.
+      - description: (Obbligatorio) Breve spiegazione di cosa fa.
+      - category:    (Opzionale) Categoria (es. 'Utility', 'Produttività', 'Developer', 'AI').
+      - tags:        (Opzionale) Array di tecnologie usate (es. ['HTML', 'JavaScript']).
+      - icon:        (Opzionale) Nome icona Lucide (es. 'code', 'file-text', 'calculator', 'sparkles', 'globe', ecc.).
+      - previewImage:(Opzionale) URL di uno screenshot o immagine di copertina (lascia "" se vuoi solo l'icona).
+      - appUrl:      (Obbligatorio) Link alla web app pubblicata.
+      - githubUrl:   (Opzionale) Link al repository GitHub (lascia "" se non vuoi mostrarlo).
+      - badge:       (Opzionale) Testo per un badge promozionale (es. 'Nuovo', 'Popolare', o lascia vuoto "").
+      ==========================================================================
+    */
+
+    const WEB_APPS = [
+      {
+        title: "Web App Esempio 1",
+        description: "Uno strumento web veloce e intuitivo per gestire e visualizzare dati in tempo reale con interfaccia moderna.",
+        category: "Utility",
+        tags: ["JavaScript", "TailwindCSS", "API"],
+        icon: "layout-template",
+        previewImage: "", // es: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format&fit=crop"
+        appUrl: "https://mas-bon.github.io/", // Sostituisci col link alla tua app
+        githubUrl: "https://github.com/mas-bon", // Sostituisci col link alla repo (o lascia "")
+        badge: "In Primo Piano"
+      },
+      {
+        title: "Generatore & Converter Tool",
+        description: "Utility online creata per convertire formati di testo, generare snippet di codice e validare file di configurazione.",
+        category: "Developer",
+        tags: ["HTML5", "CSS3", "Tool"],
+        icon: "binary",
+        previewImage: "",
+        appUrl: "https://mas-bon.github.io/",
+        githubUrl: "https://github.com/mas-bon",
+        badge: "Nuovo"
+      },
+      {
+        title: "Dashboard & Stats Tracker",
+        description: "Applicazione web per il monitoraggio e la visualizzazione di parametri, statistiche e note personali.",
+        category: "Produttività",
+        tags: ["Frontend", "ChartJS", "LocalStorage"],
+        icon: "gauge",
+        previewImage: "",
+        appUrl: "https://mas-bon.github.io/",
+        githubUrl: "https://github.com/mas-bon",
+        badge: ""
+      }
+      /* 
+        👇 INCOLLA QUI SOTTO UNA NUOVA APP COPIANDO IL SEGUENTE SCHEMA:
+        -------------------------------------------------------------
+        ,
+        {
+          title: "Nome Della Tua Nuova App",
+          description: "Descrizione dettagliata di cosa fa la tua applicazione.",
+          category: "Utility",
+          tags: ["JavaScript", "CSS"],
+          icon: "sparkles",
+          previewImage: "",
+          appUrl: "https://mas-bon.github.io/nome-tua-app",
+          githubUrl: "https://github.com/mas-bon/nome-tua-app",
+          badge: "Nuovo"
+        }
+      */
+    ];
+
+    // =========================================================================
+    // LOGICA DI RENDERING E FILTRI (Non serve modificare sotto questa riga)
+    // =========================================================================
+
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    // Inizializza anno corrente nel footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Riferimenti DOM
+    const appsGrid = document.getElementById('appsGrid');
+    const noResults = document.getElementById('noResults');
+    const searchInput = document.getElementById('searchInput');
+    const categoryTabs = document.getElementById('categoryTabs');
+    const totalAppsCount = document.getElementById('totalAppsCount');
+
+    totalAppsCount.textContent = WEB_APPS.length;
+
+    // Genera automaticamente i pulsanti per le categorie presenti nelle app
+    function setupCategories() {
+      const categories = ['all', ...new Set(WEB_APPS.map(app => app.category).filter(Boolean))];
+      
+      categoryTabs.innerHTML = categories.map(cat => {
+        const isAll = cat === 'all';
+        const label = isAll ? `Tutte (${WEB_APPS.length})` : cat;
+        return `
+          <button 
+            data-category="${cat}" 
+            class="category-btn px-4 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              cat === currentCategory 
+                ? 'bg-indigo-600 text-white shadow-sm' 
+                : 'bg-slate-900/80 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-800'
+            }"
+          >
+            ${label}
+          </button>
+        `;
+      }).join('');
+
+      // Aggiungi click listener a ciascun pulsante categoria
+      document.querySelectorAll('.category-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+          currentCategory = e.currentTarget.dataset.category;
+          setupCategories(); // Ridisegna lo stato attivo dei tab
+          renderApps();
+        });
+      });
+    }
+
+    // Renderizza le card delle Web Apps
+    function renderApps() {
+      // Filtra in base a categoria e testo di ricerca
+      const filtered = WEB_APPS.filter(app => {
+        const matchesCategory = currentCategory === 'all' || app.category === currentCategory;
+        const query = searchQuery.toLowerCase().trim();
+        const matchesSearch = !query || 
+          app.title.toLowerCase().includes(query) || 
+          app.description.toLowerCase().includes(query) ||
+          (app.tags && app.tags.some(tag => tag.toLowerCase().includes(query)));
+
+        return matchesCategory && matchesSearch;
+      });
+
+      // Gestione stato vuoto
+      if (filtered.length === 0) {
+        appsGrid.innerHTML = '';
+        noResults.classList.remove('hidden');
+        return;
+      }
+
+      noResults.classList.add('hidden');
+
+      // Generazione template HTML delle card
+      appsGrid.innerHTML = filtered.map(app => {
+        // Tag tech
+        const tagsHtml = (app.tags || []).map(tag => `
+          <span class="px-2 py-0.5 text-[11px] font-mono font-medium rounded-md bg-white/5 text-slate-300 border border-white/5">
+            ${tag}
+          </span>
+        `).join('');
+
+        // Badge promozionale opzionale (es. "Nuovo", "In evidenza")
+        const badgeHtml = app.badge ? `
+          <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+            ${app.badge}
+          </span>
+        ` : '';
+
+        // Immagine opzionale o fallback icona
+        const mediaHtml = app.previewImage ? `
+          <div class="relative w-full h-40 overflow-hidden rounded-t-2xl">
+            <img src="${app.previewImage}" alt="${app.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent"></div>
+          </div>
+        ` : '';
+
+        // Icona Lucide (default a 'code' se non fornita)
+        const iconName = app.icon || 'code';
+
+        // Bottone repo GitHub opzionale
+        const githubBtnHtml = app.githubUrl ? `
+          <a 
+            href="${app.githubUrl}" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border border-white/5 transition-colors" 
+            title="Codice sorgente GitHub"
+          >
+            <i data-lucide="github" class="w-4 h-4"></i>
+          </a>
+        ` : '';
+
+        return `
+          <article class="glass-card rounded-2xl flex flex-col justify-between overflow-hidden group">
+            ${mediaHtml}
+            <div class="p-6 flex-grow flex flex-col justify-between">
+              <div>
+                <!-- Card Header (Icona + Categoria/Badge) -->
+                <div class="flex items-center justify-between mb-4">
+                  <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:text-indigo-300 group-hover:border-indigo-400/50 transition-all">
+                    <i data-lucide="${iconName}" class="w-5 h-5"></i>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    ${badgeHtml}
+                    ${app.category ? `
+                      <span class="text-xs font-mono text-slate-500 uppercase tracking-wider">
+                        ${app.category}
+                      </span>
+                    ` : ''}
+                  </div>
+                </div>
+
+                <!-- Titolo & Descrizione -->
+                <h3 class="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors mb-2">
+                  ${app.title}
+                </h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-4 line-clamp-3">
+                  ${app.description}
+                </p>
+              </div>
+
+              <!-- Tags & Pulsanti di azione -->
+              <div class="pt-4 border-t border-white/5 mt-auto">
+                <div class="flex flex-wrap gap-1.5 mb-5">
+                  ${tagsHtml}
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <!-- Pulsante "Apri App" -->
+                  <a 
+                    href="${app.appUrl}" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="flex-grow flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-md shadow-indigo-600/20 hover:shadow-indigo-600/30"
+                  >
+                    <span>Apri App</span>
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                  </a>
+
+                  ${githubBtnHtml}
+                </div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      // Re-inizializza le icone Lucide per i nuovi elementi DOM iniettati
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    // Listener per la ricerca in tempo reale
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderApps();
+    });
+
+    // Avvio all'apertura della pagina
+    setupCategories();
+    renderApps();
+  </script>
+</body>
+</html>
