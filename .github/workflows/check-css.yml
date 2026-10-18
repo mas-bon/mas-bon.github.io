@@ -1,0 +1,20 @@
+name: Check Tailwind CSS
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  css:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build:css
+      - name: Verifica che tailwind.css sia aggiornato
+        run: git diff --exit-code tailwind.css
