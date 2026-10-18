@@ -16,5 +16,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build:css
-      - name: Verifica che tailwind.css sia aggiornato
-        run: git diff --exit-code tailwind.css
+      - run: node scripts/build-en.js
+      - name: Verifica che tailwind.css e en/index.html siano aggiornati
+        run: git diff --exit-code tailwind.css en/index.html

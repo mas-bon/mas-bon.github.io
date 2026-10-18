@@ -8,6 +8,9 @@
 
   <link rel="icon" href="./favicon.png" type="image/png" />
   <link rel="canonical" href="https://mas-bon.github.io/" />
+  <link rel="alternate" hreflang="it" href="https://mas-bon.github.io/" />
+  <link rel="alternate" hreflang="en" href="https://mas-bon.github.io/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://mas-bon.github.io/" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="mas-bon | Portfolio & Web Apps" />
   <meta property="og:description" content="Applicazioni web e progetti open source di mas-bon." />
@@ -396,6 +399,7 @@
     function detectLanguage() {
       const fromUrl = new URLSearchParams(location.search).get('lang');
       if (fromUrl === 'it' || fromUrl === 'en') return fromUrl;
+      if (document.documentElement.dataset.forceLang === 'en') return 'en';
       try {
         const saved = localStorage.getItem('lang');
         if (saved === 'it' || saved === 'en') return saved;
@@ -405,6 +409,9 @@
 
     let currentLang = detectLanguage();
     const t = (key) => I18N[currentLang][key];
+
+    // I percorsi "./x" di apps.json sono relativi alla radice del sito (la pagina /en/ vive un livello sotto)
+    const assetUrl = (p) => (p && p.startsWith('./') && location.pathname.includes('/en/')) ? '.' + p : p;
 
     // Campo localizzato di una app: usa `campo_en` se la lingua è inglese e il campo esiste
     function localized(app, field) {
@@ -530,7 +537,7 @@
         // Immagine opzionale o fallback icona
         const mediaHtml = app.previewImage ? `
           <div class="relative w-full h-40 overflow-hidden rounded-t-2xl">
-            <img src="${app.previewImage}" alt="${app.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+            <img src="${assetUrl(app.previewImage)}" alt="${app.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
             <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent"></div>
           </div>
         ` : '';
@@ -590,7 +597,7 @@
                 <div class="flex items-center gap-2">
                   <!-- Pulsante "Apri App" -->
                   <a 
-                    href="${app.appUrl}" 
+                    href="${assetUrl(app.appUrl)}" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     class="flex-grow flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-md shadow-indigo-600/20 hover:shadow-indigo-600/30"
