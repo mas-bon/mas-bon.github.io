@@ -6,6 +6,7 @@
   <title>mas-bon | Portfolio & Web Apps</title>
   <meta name="description" content="Portfolio di mas-bon - Appassionato di programmazione e web tools. Scopri le mie applicazioni web e progetti open source." />
 
+  <link rel="icon" href="./viniloteca/favicon.png" type="image/png" />
   <link rel="canonical" href="https://mas-bon.github.io/" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="mas-bon | Portfolio & Web Apps" />
@@ -36,6 +37,17 @@
     }
 
     /* Glow orb animation */
+    @media (prefers-reduced-motion: reduce) {
+      .animate-glow { animation: none; }
+      .glass-card, .glass-card:hover { transition: none; transform: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    :focus-visible {
+      outline: 2px solid #818cf8;
+      outline-offset: 2px;
+    }
+
     @keyframes pulse-slow {
       0%, 100% { opacity: 0.35; transform: scale(1); }
       50% { opacity: 0.6; transform: scale(1.08); }
@@ -290,8 +302,8 @@
       ==========================================================================
       🚀 GUIDA PER AGGIUNGERE NUOVE WEB APP:
       ==========================================================================
-      Per aggiungere una nuova applicazione al tuo portfolio, ti basta COPIARE
-      e INCOLLARE uno dei blocchi all'interno dell'array `WEB_APPS` qui sotto.
+      Per aggiungere una nuova applicazione al portfolio, copia uno degli
+      oggetti presenti in `apps.json` (stessa cartella di questo file).
 
       PARAMETRI DISPONIBILI:
       - title:       (Obbligatorio) Nome della web app.
@@ -306,45 +318,7 @@
       ==========================================================================
     */
 
-    const WEB_APPS = [
-      {
-        title: "Pressione – Diario Arterioso",
-        description: "Diario smart della pressione arteriosa 100% locale e offline. Classificazione clinica ESC/ESH, grafici interattivi, export Excel/CSV e Report Medico in PDF per iPhone e Desktop.",
-        category: "Salute & Benessere",
-        tags: ["PWA", "React", "ChartJS", "PDF Report", "iOS Ready"],
-        icon: "heart-pulse",
-        previewImage: "./pressione-preview.svg",
-        appUrl: "https://mas-bon.github.io/diario-pressione/",
-        githubUrl: "https://github.com/mas-bon/diario-pressione",
-        badge: "Nuovo"
-      },
-      {
-        title: "Viniloteca",
-        description: "Catalogo e archivio interattivo per collezionisti di vinili 33 e 45 giri. Filtra per genere, cerca per artista e gestisci la tua collezione anche su iPhone.",
-        category: "Musica & Hobby",
-        tags: ["PWA", "LocalStorage", "TailwindCSS", "Mobile Ready"],
-        icon: "disc-3",
-        previewImage: "./viniloteca-preview.jpg",
-        appUrl: "./viniloteca/", // Funziona sia in locale che online su GitHub Pages!
-        githubUrl: "https://github.com/mas-bon/mas-bon.github.io/tree/main/viniloteca",
-        badge: "In Primo Piano"
-      },
-      /* 
-        👇 INCOLLA QUI SOTTO UNA NUOVA APP COPIANDO IL SEGUENTE SCHEMA:
-        -------------------------------------------------------------
-        {
-          title: "Nome Della Tua Nuova App",
-          description: "Descrizione dettagliata di cosa fa la tua applicazione.",
-          category: "Utility",
-          tags: ["JavaScript", "CSS"],
-          icon: "sparkles",
-          previewImage: "",
-          appUrl: "https://mas-bon.github.io/nome-tua-app",
-          githubUrl: "https://github.com/mas-bon/nome-tua-app",
-          badge: "Nuovo"
-        }
-      */
-    ];
+    let WEB_APPS = [];
 
     // =========================================================================
     // LOGICA DI RENDERING E FILTRI (Non serve modificare sotto questa riga)
@@ -362,8 +336,6 @@
     const searchInput = document.getElementById('searchInput');
     const categoryTabs = document.getElementById('categoryTabs');
     const totalAppsCount = document.getElementById('totalAppsCount');
-
-    totalAppsCount.textContent = WEB_APPS.length;
 
     // Genera automaticamente i pulsanti per le categorie presenti nelle app
     function setupCategories() {
@@ -527,8 +499,18 @@
     });
 
     // Avvio all'apertura della pagina
-    setupCategories();
-    renderApps();
+    fetch('./apps.json')
+      .then((res) => res.json())
+      .catch((err) => {
+        console.error('Impossibile caricare apps.json', err);
+        return [];
+      })
+      .then((apps) => {
+        WEB_APPS = apps;
+        totalAppsCount.textContent = WEB_APPS.length;
+        setupCategories();
+        renderApps();
+      });
   </script>
 </body>
 </html>

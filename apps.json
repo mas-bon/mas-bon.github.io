@@ -1,0 +1,24 @@
+[
+  {
+    "title": "Pressione – Diario Arterioso",
+    "description": "Diario smart della pressione arteriosa 100% locale e offline. Classificazione clinica ESC/ESH, grafici interattivi, export Excel/CSV e Report Medico in PDF per iPhone e Desktop.",
+    "category": "Salute & Benessere",
+    "tags": ["PWA", "React", "ChartJS", "PDF Report", "iOS Ready"],
+    "icon": "heart-pulse",
+    "previewImage": "./pressione-preview.svg",
+    "appUrl": "https://mas-bon.github.io/diario-pressione/",
+    "githubUrl": "https://github.com/mas-bon/diario-pressione",
+    "badge": "Nuovo"
+  },
+  {
+    "title": "Viniloteca",
+    "description": "Catalogo e archivio interattivo per collezionisti di vinili 33 e 45 giri. Filtra per genere, cerca per artista e gestisci la tua collezione anche su iPhone.",
+    "category": "Musica & Hobby",
+    "tags": ["PWA", "LocalStorage", "TailwindCSS", "Mobile Ready"],
+    "icon": "disc-3",
+    "previewImage": "./viniloteca-preview.jpg",
+    "appUrl": "./viniloteca/",
+    "githubUrl": "https://github.com/mas-bon/mas-bon.github.io/tree/main/viniloteca",
+    "badge": "In Primo Piano"
+  }
+]
